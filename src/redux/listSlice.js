@@ -8,7 +8,9 @@ const listSlice = createSlice({
       state.push(action.payload);
     },
     eliminarLista(state, action) {
-      state.filter((list) => list.id !== action.payload.listId);
+      // Eliminar la lista
+      const newState = state.filter((list) => list.id !== action.payload.id);
+      return newState;
     },
     agregarFruta(state, action) {
       const selectedList = state.find(

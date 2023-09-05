@@ -12,6 +12,12 @@ function Example() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [input, setInput] = useState("");
+
+  const handleCreate = (e) => {
+    e.preventDefault();
+    dispatch(agregarLista({ id: uuidv4(), name: input, items: [] }));
+    handleClose();
+  };
   return (
     <>
       <i class="bi bi-plus-circle add-button" onClick={handleShow}></i>
@@ -22,14 +28,7 @@ function Example() {
             New list
           </Modal.Title>
         </Modal.Header>
-        <form
-          action=""
-          onSubmit={(event) => {
-            event.preventDefault(); //se queda lo que ya seteaste, para que no se actualize
-            dispatch(agregarLista({ id: uuidv4(), name: input, items: [] }));
-            handleClose();
-          }}
-        >
+        <form action="" onSubmit={(e) => handleCreate(e)}>
           <input
             type="text"
             className="form-control"
@@ -39,14 +38,9 @@ function Example() {
         </form>
 
         <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Cancel
+          <Button variant="primary" onClick={handleCreate}>
+            Create
           </Button>
-          {/* <Link to={"/"}>
-            <Button variant="primary" onClick={handleClose}>
-              Crear
-            </Button>
-          </Link> */}
         </Modal.Footer>
       </Modal>
     </>

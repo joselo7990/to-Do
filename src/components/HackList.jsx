@@ -15,7 +15,7 @@ const HackList = function () {
   const dispatch = useDispatch();
 
   const handleDelete = (list) => {
-    dispatch(eliminarLista({ lists: lists.name }));
+    dispatch(eliminarLista(list));
   };
 
   return (
@@ -29,7 +29,11 @@ const HackList = function () {
             </Link>
             <p className="ms-2">Created at : {formattedDate} </p>
             {
-              <Button variant="primary" className="ms-2">
+              <Button
+                variant="primary"
+                className="ms-2"
+                onClick={() => handleDelete(list)}
+              >
                 Delete
               </Button>
             }
